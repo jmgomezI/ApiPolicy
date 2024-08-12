@@ -12,25 +12,29 @@ public class PolicyService implements IPolicyService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String urlPolicy = "http://localhost:8081";
+    private final String url = "http://localhost:8081";
 
     @Override
     public Policy[] getPoliciesByUsers(String dni)  {
-        String url = urlPolicy + "/polizas?dni=" + dni;
+        String url = this.url + "/polizas?dni=" + dni;
         return this.restTemplate.getForObject(url, Policy[].class);
     }
 
     @Override
     public Policy getPoliciesByIDs(String id)  {
-        String url = urlPolicy + "/polizas/" + id;
+        String url = this.url + "/polizas/" + id;
         return this.restTemplate.getForObject(url, Policy.class);
     }
 
     @Override
     public Sinister[] getAccidentsByPolicies(String id) {
-        String url = urlPolicy + "/polizas/" + id + "/siniestros";
+        String url = this.url + "/polizas/" + id + "/siniestros";
         return this.restTemplate.getForObject(url, Sinister[].class);
     }
 
-
+    @Override
+    public Sinister getSinisterByPolicies(String policyId, String sinisterId) {
+        String url = this.url + "/siniestros/" + sinisterId;
+        return this.restTemplate.getForObject(url, Sinister.class);
+    }
 }

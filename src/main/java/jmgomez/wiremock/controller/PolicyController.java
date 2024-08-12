@@ -1,10 +1,8 @@
 package jmgomez.wiremock.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jmgomez.wiremock.model.Policy;
 import jmgomez.wiremock.model.Sinister;
 import jmgomez.wiremock.service.PolicyService;
-import jmgomez.wiremock.service.SinisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +13,23 @@ public class PolicyController {
     @Autowired
     private PolicyService policyService;
 
-    @GetMapping("/polizas")
-    public ResponseEntity<Policy[]> getPoliciesByUsers(@RequestParam String dni) throws JsonProcessingException {
+    @GetMapping("/policies")
+    public ResponseEntity<Policy[]> getPoliciesByUsers(@RequestParam String dni) {
         return ResponseEntity.ok(policyService.getPoliciesByUsers(dni));
     }
 
-    @GetMapping("/polizas/{id}")
-    public ResponseEntity<Policy> getPoliciesByIDs(@PathVariable String id) throws JsonProcessingException {
+    @GetMapping("/policies/{id}")
+    public ResponseEntity<Policy> getPoliciesByIDs(@PathVariable String id) {
         return ResponseEntity.ofNullable(policyService.getPoliciesByIDs(id));
     }
 
-    @GetMapping("/polizas/{id}/siniestros")
+    @GetMapping("/policies/{id}/accidents")
     public ResponseEntity<Sinister[]> getAccidentsByPolicies(@PathVariable String id){
         return ResponseEntity.ofNullable(policyService.getAccidentsByPolicies(id));
     }
 
-
+    @GetMapping("/policies/{policyId}/accidents/{sinisterId}")
+    public ResponseEntity<Sinister> getSinisterByPolicies(@PathVariable String policyId, @PathVariable String sinisterId){
+        return ResponseEntity.ofNullable(policyService.getSinisterByPolicies(policyId, sinisterId));
+    }
 }

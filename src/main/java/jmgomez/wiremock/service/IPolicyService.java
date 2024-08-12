@@ -11,4 +11,5 @@ public interface IPolicyService {
     Policy[] getPoliciesByUsers(String dni) throws IOException;
     Policy getPoliciesByIDs(String id) throws JsonProcessingException;
     Sinister[] getAccidentsByPolicies(String id);
+    Sinister getSinisterByPolicies(String policyId, String sinisterId);
 }
