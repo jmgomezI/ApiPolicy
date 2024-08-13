@@ -7,8 +7,8 @@ public class User {
     public User() {
     }
     public User(String password, String dni) {
-        this.password = password;
         this.dni = dni;
+        this.password = password;
     }
 
     public String getDni() {

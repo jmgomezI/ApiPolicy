@@ -15,8 +15,11 @@ public class PolicyService implements IPolicyService {
     private final String url = "http://localhost:8081";
 
     @Override
-    public Policy[] getPoliciesByUsers(String dni)  {
+    public Policy[] getPoliciesByUsers(String dni) {
         String url = this.url + "/polizas?dni=" + dni;
+        if (dni == null){
+            return null;
+        }
         return this.restTemplate.getForObject(url, Policy[].class);
     }
 

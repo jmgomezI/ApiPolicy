@@ -15,7 +15,7 @@ public class PolicyController {
 
     @GetMapping("/policies")
     public ResponseEntity<Policy[]> getPoliciesByUsers(@RequestParam String dni) {
-        return ResponseEntity.ok(policyService.getPoliciesByUsers(dni));
+        return ResponseEntity.ofNullable(policyService.getPoliciesByUsers(dni));
     }
 
     @GetMapping("/policies/{id}")
