@@ -1,10 +1,10 @@
-package jmgomez.wiremock;
+package jmgomez.apipolicy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WiremockApplicationTests {
+class ApipolicyApplicationTests {
 
 	@Test
 	void contextLoads() {

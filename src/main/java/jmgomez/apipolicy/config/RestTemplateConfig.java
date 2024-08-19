@@ -1,4 +1,4 @@
-package jmgomez.wiremock.utils;
+package jmgomez.apipolicy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

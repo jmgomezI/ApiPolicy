@@ -1,13 +1,13 @@
-package jmgomez.wiremock;
+package jmgomez.apipolicy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WiremockApplication {
+public class ApiPolicyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WiremockApplication.class, args);
+		SpringApplication.run(ApiPolicyApplication.class, args);
 	}
 
 }
