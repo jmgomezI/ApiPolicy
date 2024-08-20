@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
     @JsonProperty("dni")
-    private String dni;
+    private String id;
     private String password;
     private Policy[] policies;
 
-    public User(String dni, String password) {
-        this.dni = dni;
+    public User(String id, String password) {
+        this.id = id;
         this.password = password;
     }
 }

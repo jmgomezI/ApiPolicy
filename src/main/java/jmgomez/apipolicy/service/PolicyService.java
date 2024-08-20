@@ -1,16 +1,14 @@
 package jmgomez.apipolicy.service;
 
 import jmgomez.apipolicy.model.Accident;
-import jmgomez.apipolicy.model.User;
+import jmgomez.apipolicy.model.Policy;
 import jmgomez.apipolicy.model.dto.PolicyDto;
 import jmgomez.apipolicy.model.dto.PolicyDtoCov;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class PolicyService implements IPolicyService {
@@ -18,17 +16,11 @@ public class PolicyService implements IPolicyService {
     @Autowired
     private RestTemplate restTemplate;
 
-    List<User> users = new ArrayList<>(Arrays.asList(
-            new User("00000000T","12345"),
-            new User("00000000R", "54321")
-    ));
-
     private final String url = "http://localhost:8081";
 
     @Override
-    public PolicyDto[] getPolicies() {
-        String url = this.url + "/polizas";
-        //users.stream().filter(user -> user.getDni())
+    public PolicyDto[] getPolicies(String id) {
+        String url = this.url + "/polizas?dni=" + id;
         return this.restTemplate.getForObject(url, PolicyDto[].class);
     }
 
@@ -48,6 +40,21 @@ public class PolicyService implements IPolicyService {
     public Accident getAccidentByPolicies(String policyId, String accidentId) {
         String url = this.url + "/siniestros/" + accidentId;
         return this.restTemplate.getForObject(url, Accident.class);
+    }
+
+    public PolicyDto fromPolicyToPolicyDto(Policy policy){
+        PolicyDto policyDto = new PolicyDto();
+        policyDto.setId(policy.getId());
+        policyDto.setDescription(policy.getDescription());
+        return policyDto;
+    }
+
+    public PolicyDtoCov fromPolicyToPolicyDtoCov(Policy policy){
+        PolicyDtoCov policyDtoCov = new PolicyDtoCov();
+        policyDtoCov.setId(policy.getId());
+        policyDtoCov.setDescription(policy.getDescription());
+        policyDtoCov.setCoverages(policy.getCoverages());
+        return policyDtoCov;
     }
 
 //    @Override

@@ -9,7 +9,7 @@ import jmgomez.apipolicy.model.dto.PolicyDtoCov;
 import java.io.IOException;
 
 public interface IPolicyService {
-    PolicyDto[] getPolicies();
+    PolicyDto[] getPolicies(String dni);
     PolicyDtoCov getPoliciesByIDs(String id);
     Accident[] getAccidentsByPolicies(String id);
     Accident getAccidentByPolicies(String policyId, String accidentId);
