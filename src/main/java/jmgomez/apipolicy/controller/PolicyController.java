@@ -1,12 +1,10 @@
 package jmgomez.apipolicy.controller;
 
-import jmgomez.apipolicy.model.Policy;
 import jmgomez.apipolicy.model.Accident;
 import jmgomez.apipolicy.model.dto.PolicyDto;
 import jmgomez.apipolicy.model.dto.PolicyDtoCov;
 import jmgomez.apipolicy.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
