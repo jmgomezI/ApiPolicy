@@ -16,7 +16,7 @@ API that connect with the wiremock service for a better dev experience provided 
 3. Run wiremock service using the following command in the `wiremock-main` terminal:</br>
 ` docker run -it --rm -p 8081:8080 --name wiremock -v $PWD:/home/wiremock wiremock/wiremock:3.9.1 `
 4. Go to postman or the navigator and copy this URL:</br>
-[http://localhost:8080/policies?dni=00000000T](` http://localhost:8080/policies?dni=00000000T `)</br>
+http://localhost:8080/policies?dni=00000000T</br>
 5. Insert user `admin` and password `admin`
 
 > [!NOTE]
