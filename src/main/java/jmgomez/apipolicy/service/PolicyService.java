@@ -34,6 +34,6 @@ public class PolicyService implements IPolicyService {
 
     @Override
     public Accident getAccidentByPolicies(String policyId, String accidentId) {
-        return policyClient.getAccidentByPolicies("12345" + policyId, "A12345" + accidentId);
+        return policyClient.getAccidentByPolicies("12345" + policyId, accidentId);
     }
 }

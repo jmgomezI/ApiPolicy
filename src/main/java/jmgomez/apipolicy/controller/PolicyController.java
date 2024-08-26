@@ -20,18 +20,18 @@ public class PolicyController {
     }
 
     @GetMapping("/policies/{id}")
-    public PolicyDtoCov getPolicyByIDs(@PathVariable String id) {
-        return policyService.getPoliciesByIDs(getUserId());
+    public PolicyDtoCov getPolicyByIDs(@PathVariable("id") String id) {
+        return policyService.getPoliciesByIDs(getUserId() + id);
     }
 
     @GetMapping("/policies/{id}/accidents")
-    public Accident[] getAccidentsByPolicies(@PathVariable String id){
-        return policyService.getAccidentsByPolicies(getUserId());
+    public Accident[] getAccidentsByPolicies(@PathVariable("id") String id){
+        return policyService.getAccidentsByPolicies(getUserId() + id);
     }
 
     @GetMapping("/policies/{policyId}/accidents/{accidentId}")
-    public Accident getAccidentByPolicies(@PathVariable String policyId, @PathVariable String accidentId){
-        return policyService.getAccidentByPolicies(getUserId(), getUserId());
+    public Accident getAccidentByPolicies(@PathVariable("policyId") String policyId, @PathVariable("accidentId") String accidentId){
+        return policyService.getAccidentByPolicies(getUserId() + policyId, accidentId);
     }
 
     public String getUserId(){
