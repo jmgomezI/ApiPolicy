@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,9 +17,9 @@ public class Policy {
     @JsonProperty("descripcion")
     private String description;
     @JsonProperty("coberturas")
-    private String[] coverages;
+    private List<String> coverages;
     @JsonProperty("condiciones")
-    private String[] conditions;
+    private List<String> conditions;
     @JsonProperty("siniestros")
-    private Accident[] accidents;
+    private List<Accident> accidents;
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PolicyController {
 
@@ -15,23 +17,23 @@ public class PolicyController {
     private PolicyService policyService;
 
     @GetMapping("/policies")
-    public PolicyDto[] getPolicies() {
+    public List<PolicyDto> getPolicies() {
         return policyService.getPolicies(getUserId());
     }
 
     @GetMapping("/policies/{id}")
     public PolicyDtoCov getPolicyByIDs(@PathVariable("id") String id) {
-        return policyService.getPoliciesByIDs(getUserId() + id);
+        return policyService.getPoliciesByIDs(id);
     }
 
     @GetMapping("/policies/{id}/accidents")
-    public Accident[] getAccidentsByPolicies(@PathVariable("id") String id){
-        return policyService.getAccidentsByPolicies(getUserId() + id);
+    public List<Accident> getAccidentsByPolicies(@PathVariable("id") String id){
+        return policyService.getAccidentsByPolicies(id);
     }
 
     @GetMapping("/policies/{policyId}/accidents/{accidentId}")
     public Accident getAccidentByPolicies(@PathVariable("policyId") String policyId, @PathVariable("accidentId") String accidentId){
-        return policyService.getAccidentByPolicies(getUserId() + policyId, accidentId);
+        return policyService.getAccidentByPolicies(policyId, accidentId);
     }
 
     public String getUserId(){

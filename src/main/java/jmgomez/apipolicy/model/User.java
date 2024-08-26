@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +14,7 @@ public class User {
     @JsonProperty("dni")
     private String id;
     private String password;
-    private Policy[] policies;
+    private List<Policy> policies;
 
     public User(String id, String password) {
         this.id = id;

@@ -7,6 +7,8 @@ import jmgomez.apipolicy.model.dto.PolicyDtoCov;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PolicyService implements IPolicyService {
 
@@ -18,22 +20,22 @@ public class PolicyService implements IPolicyService {
     }
 
     @Override
-    public PolicyDto[] getPolicies(String id) {
+    public List<PolicyDto> getPolicies(String id) {
         return policyClient.getPolicies(id);
     }
 
     @Override
     public PolicyDtoCov getPoliciesByIDs(String id)  {
-        return policyClient.getPolicyByIDs("12345" + id);
+        return policyClient.getPolicyByIDs(id);
     }
 
     @Override
-    public Accident[] getAccidentsByPolicies(String id) {
-        return policyClient.getAccidentsByPolicies("12345" + id);
+    public List<Accident> getAccidentsByPolicies(String id) {
+        return policyClient.getAccidentsByPolicies(id);
     }
 
     @Override
     public Accident getAccidentByPolicies(String policyId, String accidentId) {
-        return policyClient.getAccidentByPolicies("12345" + policyId, accidentId);
+        return policyClient.getAccidentByPolicies(policyId, accidentId);
     }
 }
