@@ -1,8 +1,9 @@
 package jmgomez.apipolicy.controller;
 
 import jmgomez.apipolicy.model.Accident;
+import jmgomez.apipolicy.model.Policy;
+import jmgomez.apipolicy.model.dto.AccidentDto;
 import jmgomez.apipolicy.model.dto.PolicyDto;
-import jmgomez.apipolicy.model.dto.PolicyDtoCov;
 import jmgomez.apipolicy.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,25 +19,33 @@ public class PolicyController {
 
     @GetMapping("/policies")
     public List<PolicyDto> getPolicies() {
-        return policyService.getPolicies(getUserId());
+        return policyService.getPolicies(getUserId()).stream().map(this::changePolicyToPolicyDto).toList();
     }
 
     @GetMapping("/policies/{id}")
-    public PolicyDtoCov getPolicyByIDs(@PathVariable("id") String id) {
-        return policyService.getPoliciesByIDs(id);
+    public PolicyDto getPolicyByIDs(@PathVariable("id") String id) {
+        return changePolicyToPolicyDto(policyService.getPolicyByIDs(id, getUserId()));
     }
 
     @GetMapping("/policies/{id}/accidents")
-    public List<Accident> getAccidentsByPolicies(@PathVariable("id") String id){
-        return policyService.getAccidentsByPolicies(id);
+    public List<AccidentDto> getAccidents(@PathVariable("id") String id){
+        return policyService.getAccidents(id, getUserId()).stream().map(this::changeAccidentToAccidentDto).toList();
     }
 
     @GetMapping("/policies/{policyId}/accidents/{accidentId}")
-    public Accident getAccidentByPolicies(@PathVariable("policyId") String policyId, @PathVariable("accidentId") String accidentId){
-        return policyService.getAccidentByPolicies(policyId, accidentId);
+    public AccidentDto getAccidentByIDs(@PathVariable("policyId") String policyId, @PathVariable("accidentId") String accidentId){
+        return changeAccidentToAccidentDto(policyService.getAccidentByIDs(policyId, accidentId, getUserId()));
     }
 
     public String getUserId(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    public PolicyDto changePolicyToPolicyDto(Policy policy) {
+        return new PolicyDto(policy.getPolicyId(), policy.getDescription());
+    }
+
+    public AccidentDto changeAccidentToAccidentDto(Accident accident) {
+        return new AccidentDto(accident.getSinisterId(), accident.getStatus());
     }
 }

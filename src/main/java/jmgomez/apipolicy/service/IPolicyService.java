@@ -1,15 +1,13 @@
 package jmgomez.apipolicy.service;
 
 import jmgomez.apipolicy.model.Accident;
-import jmgomez.apipolicy.model.dto.PolicyDto;
-import jmgomez.apipolicy.model.dto.PolicyDtoCov;
+import jmgomez.apipolicy.model.Policy;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface IPolicyService {
-    List<PolicyDto> getPolicies(String dni);
-    PolicyDtoCov getPoliciesByIDs(String id);
-    List<Accident> getAccidentsByPolicies(String id);
-    Accident getAccidentByPolicies(String policyId, String accidentId);
+    List<Policy> getPolicies(String dni);
+    Policy getPolicyByIDs(String id, String userId);
+    List<Accident> getAccidents(String id, String userId);
+    Accident getAccidentByIDs(String policyId, String accidentId, String userId);
 }
