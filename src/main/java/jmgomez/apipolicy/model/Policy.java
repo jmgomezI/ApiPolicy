@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mapstruct.Mapping;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Policy {
-    @JsonProperty("polizaId")
-    private String policyId;
-    @JsonProperty("descripcion")
-    private String description;
+    private String polizaId;
+    private String descripcion;
 }
