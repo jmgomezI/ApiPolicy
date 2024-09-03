@@ -1,7 +1,5 @@
 package jmgomez.apipolicy.controller;
 
-import jmgomez.apipolicy.model.Accident;
-import jmgomez.apipolicy.model.Policy;
 import jmgomez.apipolicy.model.dto.AccidentDto;
 import jmgomez.apipolicy.model.dto.PolicyDto;
 import jmgomez.apipolicy.service.PolicyService;
@@ -19,33 +17,25 @@ public class PolicyController {
 
     @GetMapping("/policies")
     public List<PolicyDto> getPolicies() {
-        return policyService.getPolicies(getUserId()).stream().map(this::changePolicyToPolicyDto).toList();
+        return policyService.getPolicies(getUserId());
     }
 
-    @GetMapping("/policies/{id}")
-    public PolicyDto getPolicyByIDs(@PathVariable("id") String id) {
-        return changePolicyToPolicyDto(policyService.getPolicyByIDs(id, getUserId()));
+    @GetMapping("/policies/{policyId}")
+    public PolicyDto getPolicyByIDs(@PathVariable("policyId") String id) {
+        return policyService.getPolicyByIDs(id);
     }
 
-    @GetMapping("/policies/{id}/accidents")
-    public List<AccidentDto> getAccidents(@PathVariable("id") String id){
-        return policyService.getAccidents(id, getUserId()).stream().map(this::changeAccidentToAccidentDto).toList();
+    @GetMapping("/policies/{policyId}/accidents")
+    public List<AccidentDto> getAccidents(@PathVariable("policyId") String policyId){
+        return policyService.getAccidents(policyId);
     }
 
     @GetMapping("/policies/{policyId}/accidents/{accidentId}")
     public AccidentDto getAccidentByIDs(@PathVariable("policyId") String policyId, @PathVariable("accidentId") String accidentId){
-        return changeAccidentToAccidentDto(policyService.getAccidentByIDs(policyId, accidentId, getUserId()));
+        return policyService.getAccidentByIDs(policyId, accidentId);
     }
 
     public String getUserId(){
         return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
-    public PolicyDto changePolicyToPolicyDto(Policy policy) {
-        return new PolicyDto(policy.getPolicyId(), policy.getDescription());
-    }
-
-    public AccidentDto changeAccidentToAccidentDto(Accident accident) {
-        return new AccidentDto(accident.getSinisterId(), accident.getStatus());
     }
 }

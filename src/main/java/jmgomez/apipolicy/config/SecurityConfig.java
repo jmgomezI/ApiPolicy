@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,23 +21,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/policies").permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults());
-    return http.build();
+        return http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> {
+                    authorize
+                            .requestMatchers("/policies").authenticated()
+                            .requestMatchers("/policies/**").authenticated();
+                })
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
                 UserDetails user1 = User.withUsername("00000000T")
                 .password(passwordEncoder().encode("12345user1"))
+                .authorities("read")
                 .roles("USER")
                 .build();
 
         UserDetails user2 = User.withUsername("00000000R")
                 .password(passwordEncoder().encode("12345user2"))
+                .authorities("read")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user1, user2);
@@ -47,5 +53,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
