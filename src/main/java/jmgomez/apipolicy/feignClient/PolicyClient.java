@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "policyClient", url = "${url_wiremock}")
+@FeignClient(name = "policyClient", url = "${spring.application.serviceUrl}")
 public interface PolicyClient {
 
     @GetMapping(value = "/polizas?dni={userId}")

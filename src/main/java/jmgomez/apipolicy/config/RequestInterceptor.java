@@ -37,26 +37,22 @@ public class RequestInterceptor implements HandlerInterceptor {
 
         if(handler instanceof HandlerMethod) {
             if(request.getRequestURI().equals("/policies") && userId != null) {
-              return true;
-            } else if (request.getRequestURI().equals("/policies/" + policyId) && policyId != null && isPolicyOfUser(policyId, userId)) {
                 return true;
-            } else if (request.getRequestURI().equals("/policies/" + policyId + "/accidents") && policyId != null && isPolicyOfUser(policyId, userId)) {
+            }else if(request.getRequestURI().contains(policyId) && accidentId == null && isPolicyOfUser(policyId, userId)) {
                 return true;
-            } else if (request.getRequestURI().equals("/policies/" + policyId + "/accidents/" + accidentId) && policyId != null && accidentId != null && isPolicyOfUser(policyId, userId) && isAccidentOfPolicy(accidentId, policyId)) {
+            } else if (request.getRequestURI().contains(accidentId) && isAccidentOfPolicy(accidentId, policyId)) {
                 return true;
             }
 
         }
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("You have no access with this user");
         return false;
     }
 
     public boolean isPolicyOfUser(String policyId, String userId) {
-        return policyService.getPolicies(userId).stream().anyMatch(policy -> policy.getPolicyId().equals(policyId));
+        return policyService.getPolicies(userId).stream().anyMatch(policyDto -> policyDto.getPolicyId().equals(policyId));
     }
 
     public boolean isAccidentOfPolicy(String accidentId, String policyId) {
-        return policyService.getAccidents(policyId).stream().anyMatch(accident -> accident.getSinisterId().equals(accidentId));
+        return policyService.getAccidents(policyId).stream().anyMatch(accidentDto -> accidentDto.getSinisterId().equals(accidentId));
     }
 }

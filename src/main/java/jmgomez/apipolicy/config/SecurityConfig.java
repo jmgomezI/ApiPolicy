@@ -37,13 +37,11 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
                 UserDetails user1 = User.withUsername("00000000T")
                 .password(passwordEncoder().encode("12345user1"))
-                .authorities("read")
                 .roles("USER")
                 .build();
 
         UserDetails user2 = User.withUsername("00000000R")
                 .password(passwordEncoder().encode("12345user2"))
-                .authorities("read")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user1, user2);

@@ -1,10 +1,13 @@
 package jmgomez.apipolicy.service;
 
 import jmgomez.apipolicy.feignClient.PolicyClient;
-import jmgomez.apipolicy.mapper.MapStructService;
+import jmgomez.apipolicy.mapper.AccidentMapper;
+import jmgomez.apipolicy.mapper.PolicyMapper;
 import jmgomez.apipolicy.model.dto.AccidentDto;
 import jmgomez.apipolicy.model.dto.PolicyDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,25 +19,30 @@ public class PolicyService implements IPolicyService {
     private PolicyClient policyClient;
 
     @Autowired
-    private MapStructService mapStructService;
+    private PolicyMapper policyMapper;
+
+    @Autowired
+    private AccidentMapper accidentMapper;
 
     @Override
     public List<PolicyDto> getPolicies(String userId) {
-        return policyClient.getPolicies(userId).stream().map(policy -> mapStructService.mapPolicyToPolicyDto(policy)).toList();
+        return policyMapper.toListDto(policyClient.getPolicies(userId));
     }
-    //@PreAuthorize("#id == authentication.name")
+
     @Override
+    @Cacheable(value = "policies")
     public PolicyDto getPolicyByIDs(String policyId)  {
-        return mapStructService.mapPolicyToPolicyDto(policyClient.getPolicyByIDs(policyId));
+        return policyMapper.toDto(policyClient.getPolicyByIDs(policyId));
     }
 
     @Override
     public List<AccidentDto> getAccidents(String policyId) {
-        return policyClient.getAccidents(policyId).stream().map(accident -> mapStructService.mapAccidentToAccidentDto(accident)).toList();
+        return accidentMapper.toListDto(policyClient.getAccidents(policyId));
     }
 
     @Override
+    @CachePut(value = "accidents")
     public AccidentDto getAccidentByIDs(String policyId, String accidentId) {
-        return mapStructService.mapAccidentToAccidentDto(policyClient.getAccidentByIDs(accidentId));
+        return accidentMapper .toDto(policyClient.getAccidentByIDs(accidentId));
     }
 }

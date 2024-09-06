@@ -1,15 +1,16 @@
 package jmgomez.apipolicy.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mapstruct.Mapping;
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PolicyDto {
+    @JsonProperty("policyId")
     private String policyId;
+    @JsonProperty("description")
     private String description;
 }

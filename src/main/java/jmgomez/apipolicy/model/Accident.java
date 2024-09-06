@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Accident {
-    private String siniestroId;
-    private String estado;
+    @JsonProperty("siniestroId")
+    private String sinisterId;
+    @JsonProperty("estado")
+    private String status;
 }
