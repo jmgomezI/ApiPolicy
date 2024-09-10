@@ -1,14 +1,14 @@
-package jmgomez.apipolicy.feignClient;
+package jmgomez.policyapi.feignClient;
 
-import jmgomez.apipolicy.model.Accident;
-import jmgomez.apipolicy.model.Policy;
+import jmgomez.policyapi.model.Accident;
+import jmgomez.policyapi.model.Policy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "policyClient", url = "${spring.application.policyServiceUrl}")
+@FeignClient(name = "policyClient", url = "${policyApi.services.policies.baseURL}")
 public interface PolicyClient {
 
     @GetMapping(value = "/polizas?dni={userId}")

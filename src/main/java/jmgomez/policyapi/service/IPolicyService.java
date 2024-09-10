@@ -1,7 +1,7 @@
-package jmgomez.apipolicy.service;
+package jmgomez.policyapi.service;
 
-import jmgomez.apipolicy.model.dto.AccidentDto;
-import jmgomez.apipolicy.model.dto.PolicyDto;
+import jmgomez.policyapi.model.dto.AccidentDto;
+import jmgomez.policyapi.model.dto.PolicyDto;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package jmgomez.apipolicy.service;
+package jmgomez.policyapi.service;
 
-import jmgomez.apipolicy.feignClient.PolicyClient;
-import jmgomez.apipolicy.mapper.AccidentMapper;
-import jmgomez.apipolicy.mapper.PolicyMapper;
-import jmgomez.apipolicy.model.dto.AccidentDto;
-import jmgomez.apipolicy.model.dto.PolicyDto;
+import jmgomez.policyapi.feignClient.PolicyClient;
+import jmgomez.policyapi.mapper.AccidentMapper;
+import jmgomez.policyapi.mapper.PolicyMapper;
+import jmgomez.policyapi.model.dto.AccidentDto;
+import jmgomez.policyapi.model.dto.PolicyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

@@ -1,8 +1,8 @@
-package jmgomez.apipolicy.controller;
+package jmgomez.policyapi.controller;
 
-import jmgomez.apipolicy.model.dto.AccidentDto;
-import jmgomez.apipolicy.model.dto.PolicyDto;
-import jmgomez.apipolicy.service.PolicyService;
+import jmgomez.policyapi.model.dto.AccidentDto;
+import jmgomez.policyapi.model.dto.PolicyDto;
+import jmgomez.policyapi.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

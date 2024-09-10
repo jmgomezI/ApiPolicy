@@ -1,4 +1,4 @@
-package jmgomez.apipolicy.config;
+package jmgomez.policyapi.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

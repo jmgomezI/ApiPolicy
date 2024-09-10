@@ -1,7 +1,7 @@
-package jmgomez.apipolicy.mapper;
+package jmgomez.policyapi.mapper;
 
-import jmgomez.apipolicy.model.Accident;
-import jmgomez.apipolicy.model.dto.AccidentDto;
+import jmgomez.policyapi.model.Accident;
+import jmgomez.policyapi.model.dto.AccidentDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package jmgomez.apipolicy.model.dto;
+package jmgomez.policyapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PolicyDto {
-    @JsonProperty("policyId")
+public class Policy {
+    @JsonProperty("polizaId")
     private String policyId;
-    @JsonProperty("description")
+    @JsonProperty("descripcion")
     private String description;
 }

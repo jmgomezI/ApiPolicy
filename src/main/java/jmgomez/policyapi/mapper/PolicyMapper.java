@@ -1,7 +1,7 @@
-package jmgomez.apipolicy.mapper;
+package jmgomez.policyapi.mapper;
 
-import jmgomez.apipolicy.model.Policy;
-import jmgomez.apipolicy.model.dto.PolicyDto;
+import jmgomez.policyapi.model.Policy;
+import jmgomez.policyapi.model.dto.PolicyDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;
