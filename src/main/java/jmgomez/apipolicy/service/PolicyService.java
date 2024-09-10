@@ -30,7 +30,7 @@ public class PolicyService implements IPolicyService {
     }
 
     @Override
-    @Cacheable(value = "policies")
+    @Cacheable("policies")
     public PolicyDto getPolicyByIDs(String policyId)  {
         return policyMapper.toDto(policyClient.getPolicyByIDs(policyId));
     }
@@ -41,7 +41,7 @@ public class PolicyService implements IPolicyService {
     }
 
     @Override
-    @CachePut(value = "accidents")
+    @CachePut("accidents")
     public AccidentDto getAccidentByIDs(String policyId, String accidentId) {
         return accidentMapper .toDto(policyClient.getAccidentByIDs(accidentId));
     }

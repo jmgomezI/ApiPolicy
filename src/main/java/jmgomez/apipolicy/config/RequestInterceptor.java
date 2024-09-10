@@ -35,17 +35,17 @@ public class RequestInterceptor implements HandlerInterceptor {
         String policyId = variables.get("policyId");
         String accidentId = variables.get("accidentId");
 
-        if(handler instanceof HandlerMethod) {
-            if(request.getRequestURI().equals("/policies") && userId != null) {
-                return true;
-            }else if(request.getRequestURI().contains(policyId) && accidentId == null && isPolicyOfUser(policyId, userId)) {
-                return true;
-            } else if (request.getRequestURI().contains(accidentId) && isAccidentOfPolicy(accidentId, policyId)) {
-                return true;
+        if (handler instanceof HandlerMethod) {
+            if (policyId != null && !isPolicyOfUser(policyId, userId)) {
+                return false;
             }
-
+            if (accidentId != null && policyId != null) {
+                if (!isAccidentOfPolicy(accidentId, policyId) || !isPolicyOfUser(policyId, userId)) {
+                    return false;
+                }
+            }
         }
-        return false;
+        return true;
     }
 
     public boolean isPolicyOfUser(String policyId, String userId) {
