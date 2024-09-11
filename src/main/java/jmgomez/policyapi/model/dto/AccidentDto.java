@@ -1,6 +1,5 @@
 package jmgomez.policyapi.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccidentDto {
-    @JsonProperty("sinisterId")
     private String sinisterId;
-    @JsonProperty("status")
     private String status;
 }

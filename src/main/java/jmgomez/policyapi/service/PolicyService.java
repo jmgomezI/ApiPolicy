@@ -6,7 +6,6 @@ import jmgomez.policyapi.mapper.PolicyMapper;
 import jmgomez.policyapi.model.dto.AccidentDto;
 import jmgomez.policyapi.model.dto.PolicyDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class PolicyService implements IPolicyService {
     }
 
     @Override
-    @CachePut("accidents")
+    @Cacheable("accidents")
     public AccidentDto getAccidentByIDs(String policyId, String accidentId) {
         return accidentMapper .toDto(policyClient.getAccidentByIDs(accidentId));
     }
