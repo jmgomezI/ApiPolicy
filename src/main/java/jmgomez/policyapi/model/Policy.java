@@ -1,4 +1,4 @@
-package jmgomez.apipolicy.model;
+package jmgomez.policyapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -9,15 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Policy {
-    private User user;
     @JsonProperty("polizaId")
-    private String id;
+    private String policyId;
     @JsonProperty("descripcion")
     private String description;
-    @JsonProperty("coberturas")
-    private String[] coverages;
-    @JsonProperty("condiciones")
-    private String[] conditions;
-    @JsonProperty("siniestros")
-    private Accident[] accidents;
 }

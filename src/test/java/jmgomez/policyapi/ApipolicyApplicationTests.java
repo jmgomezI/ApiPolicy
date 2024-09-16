@@ -1,4 +1,4 @@
-package jmgomez.apipolicy;
+package jmgomez.policyapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

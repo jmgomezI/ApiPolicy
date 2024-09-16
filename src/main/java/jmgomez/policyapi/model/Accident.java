@@ -1,4 +1,4 @@
-package jmgomez.apipolicy.model;
+package jmgomez.policyapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Accident {
     @JsonProperty("siniestroId")
-    private String id;
+    private String sinisterId;
     @JsonProperty("estado")
     private String status;
 }

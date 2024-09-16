@@ -1,15 +1,17 @@
-package jmgomez.apipolicy;
+package jmgomez.policyapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class ApiPolicyApplication {
+@EnableCaching
+public class PolicyApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiPolicyApplication.class, args);
+		SpringApplication.run(PolicyApiApplication.class, args);
 	}
 
 }
