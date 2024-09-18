@@ -37,10 +37,12 @@ public class RequestInterceptor implements HandlerInterceptor {
 
         if (handler instanceof HandlerMethod) {
             if (policyId != null && !isPolicyOfUser(policyId, userId)) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                 return false;
             }
             if (accidentId != null && policyId != null) {
                 if (!isAccidentOfPolicy(accidentId, policyId) || !isPolicyOfUser(policyId, userId)) {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
                     return false;
                 }
             }
