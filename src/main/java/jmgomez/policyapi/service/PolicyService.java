@@ -40,7 +40,7 @@ public class PolicyService implements IPolicyService {
     @Override
     @Cacheable("policies")
     @CircuitBreaker(name = "policyCB", fallbackMethod = "fallBackGetPolicy")
-    public PolicyDto getPolicyByIDs(String policyId)  {
+    public PolicyDto getPolicyByIDs(String policyId) {
         return policyMapper.toDto(policyClient.getPolicyByIDs(policyId));
     }
 
