@@ -40,10 +40,10 @@ public class GlobalExceptionHandler {
         return new ApiException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, ZonedDateTime.now(ZoneId.of(String.valueOf(ZoneOffset.UTC))));
     }
 
-    @ExceptionHandler({RetryableException.class})
+    @ExceptionHandler({RetryableException.class, ServiceUnavailableException.class})
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ResponseBody
-    public ApiException serviceUnavailableException(RetryableException e) {
+    public ApiException serviceUnavailableException(ServiceUnavailableException e) {
         log.error("Retryable Exception", e.getMessage(), e);
         return new ApiException(e.getMessage(), HttpStatus.SERVICE_UNAVAILABLE, ZonedDateTime.now(ZoneId.of(String.valueOf(ZoneOffset.UTC))));
     }

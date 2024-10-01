@@ -3,6 +3,7 @@ package jmgomez.policyapi.controller;
 import jmgomez.policyapi.model.dto.AccidentDto;
 import jmgomez.policyapi.model.dto.PolicyDto;
 import jmgomez.policyapi.service.PolicyService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class PolicyController {
 
-    @Autowired
-    private PolicyService policyService;
+    private final PolicyService policyService;
 
     @GetMapping("/policies")
     public List<PolicyDto> getPolicies() {

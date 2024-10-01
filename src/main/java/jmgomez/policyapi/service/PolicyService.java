@@ -1,33 +1,35 @@
 package jmgomez.policyapi.service;
 
+import feign.RetryableException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import jmgomez.policyapi.feignClient.PolicyClient;
+import jmgomez.policyapi.exception.ServiceUnavailableException;
+import jmgomez.policyapi.feignclient.PolicyClient;
 import jmgomez.policyapi.mapper.AccidentMapper;
 import jmgomez.policyapi.mapper.PolicyMapper;
 import jmgomez.policyapi.model.dto.AccidentDto;
 import jmgomez.policyapi.model.dto.PolicyDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PolicyService implements IPolicyService {
 
     private final PolicyClient policyClient;
-
     private final PolicyMapper policyMapper;
-
     private final AccidentMapper accidentMapper;
 
     @Override
     @CircuitBreaker(name = "policyServiceCB")
     public List<PolicyDto> getPolicies(String userId) {
-        return policyMapper.toListDto(policyClient.getPolicies(userId));
+        try {
+            return policyMapper.toListDto(policyClient.getPolicies(userId));
+        } catch (RetryableException e) {
+            throw new ServiceUnavailableException("Service unavailable");
+        }
     }
 
     @Override
