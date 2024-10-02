@@ -25,7 +25,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> {
                     authorize
                             .requestMatchers("/policies").authenticated()
-                            .requestMatchers("/policies/**").authenticated();
+                            .requestMatchers("/policies/**").authenticated()
+                            .requestMatchers("/actuator").authenticated()
+                            .requestMatchers("/actuator/**").authenticated();
                 })
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -35,7 +37,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-                UserDetails user1 = User.withUsername("00000000T")
+        UserDetails user1 = User.withUsername("00000000T")
                 .password(passwordEncoder().encode("12345user1"))
                 .roles("USER")
                 .build();

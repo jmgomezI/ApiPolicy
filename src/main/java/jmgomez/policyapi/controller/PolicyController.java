@@ -3,18 +3,17 @@ package jmgomez.policyapi.controller;
 import jmgomez.policyapi.model.dto.AccidentDto;
 import jmgomez.policyapi.model.dto.PolicyDto;
 import jmgomez.policyapi.service.PolicyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class PolicyController {
 
-    @Autowired
-    private PolicyService policyService;
+    private final PolicyService policyService;
 
     @GetMapping("/policies")
     public List<PolicyDto> getPolicies() {
@@ -22,8 +21,8 @@ public class PolicyController {
     }
 
     @GetMapping("/policies/{policyId}")
-    public PolicyDto getPolicyByIDs(@PathVariable("policyId") String id) {
-        return policyService.getPolicyByIDs(id);
+    public PolicyDto getPolicyByIDs(@PathVariable("policyId") String policyId) {
+        return policyService.getPolicyByIDs(policyId);
     }
 
     @GetMapping("/policies/{policyId}/accidents")

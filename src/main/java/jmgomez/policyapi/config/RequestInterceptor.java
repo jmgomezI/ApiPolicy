@@ -3,6 +3,7 @@ package jmgomez.policyapi.config;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jmgomez.policyapi.exception.BadRequestException;
 import jmgomez.policyapi.service.PolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -37,11 +38,11 @@ public class RequestInterceptor implements HandlerInterceptor {
 
         if (handler instanceof HandlerMethod) {
             if (policyId != null && !isPolicyOfUser(policyId, userId)) {
-                return false;
+                throw new BadRequestException("Policy with ID " + policyId + " was not found by this user");
             }
             if (accidentId != null && policyId != null) {
                 if (!isAccidentOfPolicy(accidentId, policyId) || !isPolicyOfUser(policyId, userId)) {
-                    return false;
+                    throw new BadRequestException("Accident with ID " + accidentId + " was not found by this policy");
                 }
             }
         }

@@ -1,4 +1,4 @@
-package jmgomez.policyapi.feignClient;
+package jmgomez.policyapi.feignclient;
 
 import jmgomez.policyapi.model.Accident;
 import jmgomez.policyapi.model.Policy;
