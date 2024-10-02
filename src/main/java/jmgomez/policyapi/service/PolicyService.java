@@ -25,11 +25,7 @@ public class PolicyService implements IPolicyService {
     @Override
     @CircuitBreaker(name = "policyServiceCB")
     public List<PolicyDto> getPolicies(String userId) {
-        try {
-            return policyMapper.toListDto(policyClient.getPolicies(userId));
-        } catch (RetryableException e) {
-            throw new ServiceUnavailableException("Service unavailable");
-        }
+        return policyMapper.toListDto(policyClient.getPolicies(userId));
     }
 
     @Override

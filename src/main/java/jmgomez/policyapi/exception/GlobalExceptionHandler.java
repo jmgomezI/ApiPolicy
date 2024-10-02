@@ -47,4 +47,12 @@ public class GlobalExceptionHandler {
         log.error("Retryable Exception", e.getMessage(), e);
         return new ApiException(e.getMessage(), HttpStatus.SERVICE_UNAVAILABLE, ZonedDateTime.now(ZoneId.of(String.valueOf(ZoneOffset.UTC))));
     }
+
+    @ExceptionHandler({CallNotPermittedException.class})
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ResponseBody
+    public ApiException handleCallNotPermittedException(CallNotPermittedException e) {
+        log.error("CallNoPermittedException", e.getMessage(), e);
+        return new ApiException(e.getMessage(), HttpStatus.SERVICE_UNAVAILABLE, ZonedDateTime.now(ZoneId.of(String.valueOf(ZoneOffset.UTC))));
+    }
 }
